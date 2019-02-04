@@ -111,7 +111,7 @@ class wps_info(object):
     wpsproj, latlonproj, corner_lat_full, corner_lon_full, length_x, length_y = wps.calc_wps_domain_info()
     
     """
-    def __init__(self,file,print_info=False):
+    def __init__(self,file="namelist.wps",print_info=False):
         self.filelocname = file
         self._printinfo = print_info
         if os.path.exists(self.filelocname):
@@ -122,6 +122,9 @@ class wps_info(object):
             print ("FILE NOT FOUND IN PROVIDED PATH AND/OR FILENAME")
             raise ValueError
 
+    def getfile(self):
+        ## FORGOT TO ADD ALLOWS YOU TO PROPERLY CHANGE DIRECTORIES
+        return self.filelocname   
         
     @classmethod
     def get_wps_info(cls,namelist_wps_filename="namelist.wps"):
