@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Thu Dec  6 19:21:36 2018
@@ -111,7 +111,7 @@ class wps_info(object):
     wpsproj, latlonproj, corner_lat_full, corner_lon_full, length_x, length_y = wps.calc_wps_domain_info()
     
     """
-    def __init__(self,file="namelist.wps",print_info=False):
+    def __init__(self,file,print_info=False):
         self.filelocname = file
         self._printinfo = print_info
         if os.path.exists(self.filelocname):
@@ -122,9 +122,6 @@ class wps_info(object):
             print ("FILE NOT FOUND IN PROVIDED PATH AND/OR FILENAME")
             raise ValueError
 
-    def getfile(self):
-        ## FORGOT TO ADD ALLOWS YOU TO PROPERLY CHANGE DIRECTORIES
-        return self.filelocname   
         
     @classmethod
     def get_wps_info(cls,namelist_wps_filename="namelist.wps"):
@@ -184,28 +181,58 @@ class wps_info(object):
             elif 'i_parent_start' in row:
                 tmprow = row.split("=")[1]
                 tmprow2 = tmprow.split(" ")
-                ipar = [int(item) for item in tmprow2 if item != '']
+                ipar = []
+                for item in tmprow2:
+                    if item !='':
+                        num = int(item)
+                        ipar.append(num-1)
+                        
+                        
+                ipar2 = [int(item) for item in tmprow2 if item != '']
                 cls.i_parent_start = ipar
-                
+                cls.i_parent_start_original=ipar2
                         
             elif 'j_parent_start' in row:
                 tmprow = row.split("=")[1]
                 tmprow2 = tmprow.split(" ")
-                jpar = [int(item) for item in tmprow2 if item != '']
+                jpar = []
+                for item in tmprow2:
+                    if item !='':
+                        num = int(item)
+                        jpar.append(num-1)
+                        
+                        
+                jpar2 = [int(item) for item in tmprow2 if item != '']
                 cls.j_parent_start = jpar
-                
+                cls.j_parent_start_original=jpar2
+
                 
             elif 'e_we' in row:
                 tmprow = row.split("=")[1]
                 tmprow2 = tmprow.split(" ")
-                ewe = [int(item) for item in tmprow2 if item != '']
+                ewe = []
+                for item in tmprow2:
+                    if item !='':
+                        num = int(item)
+                        ewe.append(num-1)
+                        
+                        
+                ewe2 = [int(item) for item in tmprow2 if item != '']
                 cls.e_we = ewe
-                
+                cls.e_we_original=ewe2
+
             elif 'e_sn' in row:
                 tmprow = row.split("=")[1]
                 tmprow2 = tmprow.split(" ")
-                esn = [int(item) for item in tmprow2 if item != '']
+                esn = []
+                for item in tmprow2:
+                    if item !='':
+                        num = int(item)
+                        esn.append(num-1)
+                esn2 = [int(item) for item in tmprow2 if item != '']
                 cls.e_sn = esn
+                cls.e_sn_original=esn2
+
                 
             elif 'geog_data_res' in row:
                 tmprow = row.split("=")[1]
@@ -324,10 +351,10 @@ class wps_info(object):
         print ("interval_seconds:", cls.interval_seconds)
         print ("parent_id:", cls.parent_id)   
         print ("parent_grid_ratio:", cls.parent_grid_ratio)   
-        print ("i_parent_start:", cls.i_parent_start)   
-        print ("j_parent_start:", cls.j_parent_start)   
-        print ("e_we:", cls.e_we)   
-        print ("e_sn:", cls.e_sn)   
+        print ("i_parent_start:", cls.i_parent_start_original)   
+        print ("j_parent_start:", cls.j_parent_start_original)   
+        print ("e_we:", cls.e_we_original)   
+        print ("e_sn:", cls.e_sn_original)   
         print ("geog_data_res:", cls.geog_data_res)   
         print ("dx0 =",cls.dx0)
         print ("dx =",cls.dx)
