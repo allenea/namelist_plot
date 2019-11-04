@@ -1,6 +1,4 @@
-﻿#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
+﻿"""
 Created on Thu Dec  6 19:21:36 2018
 
 @author: allenea
@@ -632,11 +630,11 @@ class wps_info(object):
         ax1.add_feature(cartopy.feature.STATES.with_scale('10m'))
         
         # I DO NOT LIKE THIS LAMBERT PROJ WORK AROUND. WAIT UNTIL CARTOPY SUPPORTS IT OR DON'T USE OR IMPLEMENT 
-        if "Lambert" in str(wpsproj):
+        #if "Lambert" in str(wpsproj):
             # Add tick marks for lambert projection (only)
             #wps_info.set_lambert_ticks(ax1)
-            wps_info.set_lambert_ticks(ax1,xskip=5.,yskip=5.,x_thickness=14,y_thickness=14)
-        elif "Mercator" in str(wpsproj) or "PlateCarree" in str(wpsproj):
+        #    wps_info.set_lambert_ticks(ax1,xskip=5.,yskip=5.,x_thickness=14,y_thickness=14)
+        if "Mercator" in str(wpsproj) or "PlateCarree" in str(wpsproj):
             ax1.gridlines(color='lightgrey', linestyle='-', draw_labels=True)
         elif "Polar" in str(wpsproj) or "Stereo" in str(wpsproj) or "lat-lon" in str(wpsproj):
             pass
